@@ -45,6 +45,8 @@ class LoanApplicationHandler
 
 	public function fetch(): array
 	{
+		if (!file_exists('s3:///files/loans.csv')) return [];
+
 		$reader = Csv\Reader::createFromPath('s3:///files/loans.csv', 'r', stream_context_create(['s3' => ['seekable' => true]]));
 
 		return iterator_to_array($reader->getRecords());
