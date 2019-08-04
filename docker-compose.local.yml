@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  web:
+    image: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/nginx.conf
+    links:
+      - phpfpm
+
+  phpfpm:
+    image: prooph/php:7.3-fpm-opcache
+
+  composer:
+    image: library/composer
+    command: install
+    volumes:
+      - ./src:/app
+
+  minio:
+    image: minio/minio:latest
+    ports:
+      - 9010:9010
+    volumes:
+      - ./docker/minio:/export
+    command: server --address ":9010" /export
+    environment:
+      MINIO_ACCESS_KEY: foo
+      MINIO_SECRET_KEY: barbarbar

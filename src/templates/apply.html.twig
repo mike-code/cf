@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Loan Application{% endblock %}
+
+{% block body %}
+	<div id="loan-form">
+		<loan-form route_store="{{ path('apply_save') }}"></loan-form>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ encore_entry_script_tags('loan_application') }}
+{% endblock %}
+

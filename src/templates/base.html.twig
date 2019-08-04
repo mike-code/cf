@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>{% block title %}{% endblock %}</title>
+		{{ encore_entry_link_tags('app') }}
+		{% block stylesheets %}{% endblock %}
+	</head>
+	<body>
+		<nav>
+			<a href="{{ path('apply_show') }}" id="logo"><span>Company.com</span></a>
+			<ul class="mainnav clearfix">
+				<a href="{{ path('admin') }}">Admin</a>
+			</ul>
+		</nav>
+
+		{% block body %}{% endblock %}
+
+		{{ encore_entry_script_tags('app') }}
+		{% block javascripts %}{% endblock %}
+	</body>
+</html>

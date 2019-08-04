@@ -1,0 +1,57 @@
+@import url("https://fonts.googleapis.com/css?family=Muli:400,400i,600,700,700i,800");
+
+body {
+	background-color: #fafafa;
+	color: #454545;
+	font-size: 1em;
+	font-family:'Muli', 'Helvetica Neue', sans-serif;
+}
+
+.ant-input-number {
+	width: 150px !important;
+}
+
+.ant-btn {
+	margin-right: 1em;
+}
+
+.admin_page .ant-list-item-meta {
+	flex: 2;
+}
+
+#logo {
+	width: 200px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#logo:link {
+	color: white;
+}
+
+#logo:visited {
+	color: white;
+}
+
+nav {
+	display: flex;
+	background: #303030;
+	color: white;
+	margin-bottom: 1em;
+}
+
+.clearfix:after {
+	clear: both;
+	display: block;
+}
+
+.mainnav {
+	align-items: center;
+	justify-content: flex-end;
+	flex: 1;
+	display: flex;
+	padding-right: 1em;
+	margin: 0;
+}

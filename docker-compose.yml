@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  web:
+    image: nginx
+    working_dir: /srv
+    ports:
+      - 80:80
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/nginx.conf
+      - ./src/public:/srv/public
+    links:
+      - phpfpm
+
+  phpfpm:
+    image: prooph/php:7.3-fpm-opcache
+    working_dir: /srv
+    volumes:
+      - ./src:/srv
+      - ./docker/php/zzz-php.ini:/usr/local/etc/php/conf.d/zzz-php.ini
+
+  minio:
+    image: minio/minio:latest
+    volumes:
+      - ./docker/minio:/export
+    command: server --address ":9010" /export
+    environment:
+      MINIO_ACCESS_KEY: foo
+      MINIO_SECRET_KEY: barbarbar

@@ -1,0 +1,7 @@
+aws:
+  endpoint: "%env(AWS_URL)%"
+  version: latest
+  region: ''
+  credentials:
+    key: "%env(AWS_KEY)%"
+    secret: "%env(AWS_SECRET)%"

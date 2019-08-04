@@ -1,0 +1,68 @@
+---
+kind: pipeline
+name: build
+
+steps:
+- name: webpack
+  image: node:12.6.0
+  depends_on: [ clone ]
+  commands:
+    - cd src
+    - node -v
+    - npm -v
+    - yarn --version
+    - ls -l
+
+- name: composer
+  image: prooph/php:7.3-fpm-opcache
+  depends_on: [ clone ]
+  commands:
+    - php -v
+    - php -r "copy('https://getcomposer.org/installer', '/tmp/composer-setup.php');"
+    - php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
+    - php -r "unlink('/tmp/composer-setup.php');"
+    - composer -V
+
+- name: build cache
+  image: drillster/drone-volume-cache
+  depends_on: [ webpack, composer ]
+  volumes:
+  - name: cache
+    path: /cache
+  settings:
+    rebuild: true
+    mount:
+      - ./src
+
+volumes:
+  - name: cache
+    host:
+      path: /tmp/cache
+
+---
+kind: pipeline
+name: deploy
+
+steps:
+- name: restore cache
+  image: drillster/drone-volume-cache
+  volumes:
+  - name: cache
+    path: /cache
+  settings:
+    restore: true
+    mount:
+      - ./src
+
+- name: push
+  image: alpine
+  commands:
+    - ls -l src
+
+depends_on:
+  - build
+
+volumes:
+  - name: cache
+    host:
+      path: /tmp/cache

@@ -1,0 +1,20 @@
+apply_show:
+  path: /
+  controller: App\Controller\LoanApplicationController::index
+  methods: GET
+
+apply_save:
+  path: /
+  controller: App\Controller\LoanApplicationController::store
+  methods: POST
+
+admin:
+   path: /admin
+   controller: App\Controller\AdminController::index
+   methods: GET
+
+schedule_get:
+   path: /schedule/{id}
+   controller: App\Controller\AdminController::schedule
+   methods: GET
+
